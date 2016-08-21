@@ -1,0 +1,4 @@
+twig:
+  globals:
+    meta_description: test
+    meta_author: autor
