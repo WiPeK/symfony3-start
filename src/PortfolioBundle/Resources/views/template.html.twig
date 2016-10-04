@@ -3,7 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
 		<meta name="description" content="{{ meta_description }}">
 		<meta name="author" content="{{ meta_author }}">
 		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
@@ -11,7 +12,10 @@
 
 		{% block stylesheets %}
     <!-- Bootstrap core CSS -->
-    <link href="{{ asset('bundles/portfolio/css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/portfolio/css/bootstrap-material-design.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/portfolio/css/materialdesignicons.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/portfolio/css/ripples.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/portfolio/css/style.css') }}" rel="stylesheet">
     {% endblock %}
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -23,21 +27,29 @@
 	</head>
 	<body>
 		<div class="container-fluid no-space">
-			{{ render(controller('PortfolioBundle:Home:getCarousel')) }}
+			{{ render(controller('PortfolioBundle:Home:getTop')) }}
 			{{ render(controller('PortfolioBundle:Home:getMenu')) }}
+			{{ render(controller('PortfolioBundle:Home:getOffer')) }}
+			{{ render(controller('PortfolioBundle:Home:getCv')) }}
 			{% block Container %}{% endblock %}
+			{% include ('PortfolioBundle::modals.html.twig') %}
 			<div class="space200"></div>
 			<div class="space200"></div>
 			<div class="space200"></div>
 			<div class="space200"></div>
 			<div class="space200"></div>
-			{% block javascripts %}	
 		</div>
+			{% block javascripts %}	
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+		<script src="https://cdn.rawgit.com/HubSpot/tether/v1.3.4/dist/js/tether.min.js"></script>
+
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
-		<script src="{{ asset('bundles/portfolio/js/bootstrap.min.js') }}"></script>
+		<script src="{{ asset('bundles/portfolio/js/bootstrap-material-design.iife.min.js') }}"></script>
 		<script src="{{ asset('bundles/portfolio/js/custom.js') }}"></script>
+		<script>
+      $('body').bootstrapMaterialDesign();
+    </script>
 		{% endblock %}
 	</body>
 </html>

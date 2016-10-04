@@ -1,18 +1,17 @@
-<nav class="navbar navbar-light bg-faded no-space no-border-radius" data-toggle="sticky-onscroll">
-  <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2" aria-controls="exCollapsingNavbar2" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-default no-space no-border-radius menu-custom" data-toggle="sticky-onscroll">
+  <button class="navbar-toggler hidden-md-up pull-right" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2" aria-controls="#exCollapsingNavbar2" aria-expanded="false" aria-label="Toggle navigation">
     &#9776;
   </button>
-  <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
-    <a class="navbar-brand" href="#">
-      <img src="{{asset(logo['url'])}}" alt="{{logo['alt']}}">
-    </a>
-    <ul class="nav navbar-nav pull-lg-right">
+  <a class="navbar-brand" href="#">
+    <img class="menu-logo" src="{{asset(logo['url'])}}" alt="{{logo['alt']}}">
+  </a>
+  <div class="collapse navbar-toggleable-sm pull-xs-right break-mobile-menu" id="exCollapsingNavbar2">
+    <ul class="nav navbar-nav">
       {% for item in menu %}
-        <li class="nav-item">
-          <a class="nav-link" href="{{item['path']}}">{{ item['name'] }} <span class="sr-only">(current)</span></a>
+        <li class="nav-item menu-item-li">
+          <a class="nav-link" href="{{item['path']}}">{{ item['name'] }}</a>
         </li>
       {% endfor %}
     </ul>
   </div>
 </nav>
-

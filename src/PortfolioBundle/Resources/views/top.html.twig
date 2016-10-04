@@ -1,0 +1,16 @@
+<div class="top-custom no-space">
+	<div class="col-xl-12 no-space">
+		<h3>Witaj na stronie mojego portfolio...</h3>
+		<h4>Ja... Krzysztof Adamczyk | WiPeK <br> chciałbym zaprosić Cię do zapoznania się z tą stroną</h4>
+		<h4>Będzie mi bardzo miło jeżeli poświęcisz swój bardzo cenny czas<br>i spędzisz tu chwilę aby poznać moją osobę<br>...i ewentualnie podjąć ze mną współpracę</h4>
+		<h2>Zapraszam</h2>
+		<div class="clearfix"></div>
+		<ul class="buttons-top-custom">
+			{% for item in menu %}
+		        <li>
+		          <a class="btn btn-raised btn-primary" href="{{item['path']}}">{{ item['name'] }}</a>
+		        </li>
+      		{% endfor %}
+		</ul>
+	</div>
+</div>

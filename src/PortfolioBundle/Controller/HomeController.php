@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class HomeController extends Controller
 {
+
 	/**
     * @Route("/", name="homepage")
     * @Template("PortfolioBundle:Home:home.html.twig")
@@ -29,33 +30,75 @@ class HomeController extends Controller
     			'alt' => 'Logo portfolio'
     		),
     		'menu' => array(
+    			array(
+	    			'path' => '#oferta',
+	    			'name' => '#Oferta'
+	    		),
 	    		array(
 	    			'path' => '#cv',
-	    			'name' => 'CV'
+	    			'name' => '#CV'
 	    		),
 	    		array(
 	    			'path' => '#projects',
-	    			'name' => 'Projekty'
+	    			'name' => '#Projekty'
 	    		),
 	    		array(
 	    			'path' => '#about',
-	    			'name' => 'O mnie'
+	    			'name' => '#O mnie'
 	    		),
 	    		array(
 	    			'path' => '#contact',
-	    			'name' => 'Kontakt'
+	    			'name' => '#Kontakt'
 	    		),
 	    	)	
     	);
     }
 
     /**
-    * @Template("PortfolioBundle::carousel.html.twig")
+    * @Template("PortfolioBundle::top.html.twig")
     */
-    static public function getCarouselAction()
+    static public function getTopAction()
     {
-    	return array(
-    		//todo
+		return array(
+    		'menu' => array(
+    			array(
+	    			'path' => '#oferta',
+	    			'name' => '#Oferta'
+	    		),
+	    		array(
+	    			'path' => '#cv',
+	    			'name' => '#CV'
+	    		),
+	    		array(
+	    			'path' => '#projects',
+	    			'name' => '#Projekty'
+	    		),
+	    		array(
+	    			'path' => '#about',
+	    			'name' => '#O mnie'
+	    		),
+	    		array(
+	    			'path' => '#contact',
+	    			'name' => '#Kontakt'
+	    		),
+	    	)	
     	);
     }
+
+    /**
+    * @Template("PortfolioBundle::offer.html.twig")
+    */
+    static public function getOfferAction()
+    {
+		return array();
+    }
+
+    /**
+    * @Template("PortfolioBundle::cv.html.twig")
+    */
+    static public function getCvAction()
+    {
+		return array();
+    }
+
 }
