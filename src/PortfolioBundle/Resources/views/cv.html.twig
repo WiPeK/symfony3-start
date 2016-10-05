@@ -1,30 +1,191 @@
 <div id="cv">
 	<h5 class="display-1 text-xs-center">CV</h5>
 	<div class="row no-space">
-		<div class="col-xl-5 col-lg-5 no-space">
+		<div class="col-xl-4 col-lg-4 no-space">
 			<img class="img-fluid img-foto" src="{{ asset('bundles/portfolio/img/foto.jpg') }}" alt="my photo">
-			<ul class="social-cv d-inline-block">
+			<ul class="social-cv">
 				<li>
-					<a href="https://www.facebook.com/ka.wipek"><i class="mdi mdi-facebook-box"></i></a>
+					<a href="https://www.facebook.com/ka.wipek" target="_blank"><i class="mdi mdi-facebook-box"></i></a>
 				</li>
 				<li>
-					<a href="https://www.instagram.com/_wipek_/"><i class="mdi mdi-instagram"></i></a>
+					<a href="https://www.instagram.com/_wipek_/" target="_blank"><i class="mdi mdi-instagram"></i></a>
 				</li>
 				<li>
-					<a href="mailto:wipekxxx@gmail.com"><i class="mdi mdi-gmail"></i></a>
+					<a href="mailto:wipekxxx@gmail.com" target="_blank"><i class="mdi mdi-gmail"></i></a>
 				</li>
 				<li>
-					<a href="https://github.com/WiPeK/"><i class="mdi mdi-github-box"></i></a>
+					<a href="https://github.com/WiPeK/" target="_blank"><i class="mdi mdi-github-box"></i></a>
 				</li>
 			</ul>
 		</div>
-		<div class="col-xl-7 col-lg-7 no-space"></div>
+		<div class="col-xl-7 col-lg-7 no-space">
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+			  <li class="nav-item">
+			    <a class="nav-link active" data-toggle="tab" href="#study-tab" role="tab">Wykształcenie</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link" data-toggle="tab" href="#exp-tab" role="tab">Doświadczenie</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link" data-toggle="tab" href="#achiev-tab" role="tab">Osiągnięcia</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link" data-toggle="tab" href="#quali-tab" role="tab">Dodatkowe kwalifikacje</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link" data-toggle="tab" href="#skills-tab" role="tab">Umiejętności</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link" data-toggle="tab" href="#langs-tab" role="tab">Języki obce</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link" data-toggle="tab" href="#interest-tab" role="tab">Zainteresowania</a>
+			  </li>
+			</ul>
+
+			<div class="tab-content tabs-custom">
+			  <div class="tab-pane fade in active" id="study-tab" role="tabpanel">
+			  	<ul class="cv-tabs">
+			  		<span class="cirli"></span>
+			  		<li>
+			  			<div class="title-tabs">Informatyka</div>
+			  			<div class="cont-tabs">Politechnika Świętokrzyska</div>
+			  			<div class="date-tabs">2015 - 2020</div>
+			  		</li>
+			  		<span class="cirli"></span>
+			  		<li>
+			  			<div class="title-tabs">Technik Informatyk</div>
+			  			<div class="cont-tabs">Technikum nr.2, Skarżysko Kamienna</div>
+			  			<div class="date-tabs">09.2011 - 04.2015</div>
+			  		</li>
+			  	</ul>
+			  	<h4 class="bot-title-cv"><i class="mdi mdi-certificate"></i> Wykształcenie</h4>
+			  </div>
+			  <div class="tab-pane fade" id="exp-tab" role="tabpanel">
+			  	<ul class="cv-tabs">
+			  		<span class="cirli"></span>
+			  		<li>
+			  			<div class="title-tabs">Magazynier</div>
+			  			<div class="cont-tabs">Brezan Automaterialen, Holandia</div>
+			  			<div class="date-tabs">05.2014 - 08.2014</div>
+			  		</li>
+			  		<span class="cirli"></span>
+			  		<li>
+			  			<div class="title-tabs">Praktykant</div>
+			  			<div class="cont-tabs">INTB Sebastian Pierzchała</div>
+			  			<div class="date-tabs">11.2013</div>
+			  		</li>
+			  		<span class="cirli"></span>
+			  		<li>
+			  			<div class="title-tabs">Praktykant</div>
+			  			<div class="cont-tabs">WBS TRAINING AG, Niemcy</div>
+			  			<div class="date-tabs">03.2013</div>
+			  		</li>
+			  	</ul>
+			  	<h4 class="bot-title-cv"><i class="mdi mdi-briefcase"></i> Doświadczenie</h4>
+			  </div>
+			  <div class="tab-pane fade" id="achiev-tab" role="tabpanel">
+			  	<ul class="cv-tabs">
+			  		<span class="cirli-double"></span>
+			  		<li>
+			  			<div class="cont-tabs">Tytuł najlepszego technika informatyka w zespole szkół ekonomicznych w Skarżysku-Kamiennej.</div>
+			  			<div class="date-tabs">04.2015</div>
+			  		</li>
+			  		<span class="cirli-double"></span>
+			  		<li>
+			  			<div class="cont-tabs">I miejsce w powiatowym konkursie na najlepszą stronę www dla szkół ponadgimnazjalnych, Skarżysko-Kamienna.</div>
+			  			<div class="date-tabs">05.2014</div>
+			  		</li>
+			  	</ul>
+			  	<h4 class="bot-title-cv"><i class="mdi mdi-trophy"></i> Osiągnięcia</h4>
+			  </div>
+			  <div class="tab-pane fade" id="quali-tab" role="tabpanel">
+			  	<ul class="cv-tabs">
+			  		<span class="cirli-double"></span>
+			  		<li>
+			  			<div class="cont-tabs">Certyfikat Masz zawód - masz pracę.</div>
+			  			<div class="date-tabs">2014</div>
+			  		</li>
+			  		<span class="cirli-double"></span>
+			  		<li>
+			  			<div class="cont-tabs">Certyfikat EUROPASS</div>
+			  			<div class="date-tabs">2013</div>
+			  		</li>
+			  		<span class="cirli-double"></span>
+			  		<li>
+			  			<div class="cont-tabs">Prawojazdy kategorii B</div>
+			  			<div class="date-tabs">2013</div>
+			  		</li>
+			  	</ul>
+			  	<h4 class="bot-title-cv"><i class="mdi mdi-account-star"></i> Dodatkowe kwalifikacje</h4>
+			  </div>
+			  <div class="tab-pane fade" id="skills-tab" role="tabpanel">
+			  	<ul class="cv-tabs">
+			  		<span class="cirli-single"></span>
+			  		<li>
+			  			<div class="cont-tabs">Organizacja pracy w grupie</div>
+			  		</li>
+			  		<span class="cirli-single"></span>
+			  		<li>
+			  			<div class="cont-tabs">Obsługa pakietu Microsoft Office</div>
+			  		</li>
+			  		<span class="cirli-single"></span>
+			  		<li>
+			  			<div class="cont-tabs">Kompleksowa obsługa komputera</div>
+			  		</li>
+			  		<span class="cirli-single"></span>
+			  		<li>
+			  			<div class="cont-tabs">Znajomość HTML5, CSS3, Twitter Bootstrap</div>
+			  		</li>
+			  		<span class="cirli-single"></span>
+			  		<li>
+			  			<div class="cont-tabs">Znajomość PHP oraz frameworka Codeigniter</div>
+			  		</li>
+			  		<span class="cirli-single"></span>
+			  		<li>
+			  			<div class="cont-tabs">Podstawowa znajomość jquery oraz javascript</div>
+			  		</li>
+			  	</ul>
+			  	<h4 class="bot-title-cv"><i class="mdi mdi-star"></i> Umiejętności</h4>
+			  </div>
+			  <div class="tab-pane fade" id="langs-tab" role="tabpanel">
+			  	<ul class="cv-tabs">
+			  		<span class="cirli-double"></span>
+			  		<li>
+			  			<div class="title-tabs">Język angielski</div>
+			  			<div class="cont-tabs">Poziom średniozaawansowany</div>
+			  		</li>
+			  		<span class="cirli-double"></span>
+			  		<li>
+			  			<div class="title-tabs">Język niemiecki</div>
+			  			<div class="cont-tabs">Poziom podstawowy</div>
+			  		</li>
+			  	</ul>
+			  	<h4 class="bot-title-cv"><i class="mdi mdi-google-translate"></i> Języki obce</h4>
+			  </div>
+			  <div class="tab-pane fade" id="interest-tab" role="tabpanel">
+			  	<ul class="cv-tabs">
+			  		<span class="cirli-single"></span>
+			  		<li>
+			  			<div class="cont-tabs">Muzyka</div>
+			  		</li>
+			  		<span class="cirli-single"></span>
+			  		<li>
+			  			<div class="cont-tabs">Polityka</div>
+			  		</li>
+			  		<span class="cirli-single"></span>
+			  		<li>
+			  			<div class="cont-tabs">Informatyka</div>
+			  		</li>
+			  		<span class="cirli-single"></span>
+			  		<li>
+			  			<div class="cont-tabs">Ciekawostki ze świata</div>
+			  		</li>
+			  	</ul>
+			  	<h4 class="bot-title-cv"><i class="mdi mdi-puzzle"></i> Zainteresowania</h4>
+			  </div>
+			</div>
+		</div>
 	</div>
-
-
-	<div class="space200"></div>
-	<div class="space200"></div>
-	<div class="space200"></div>
-	<div class="space200"></div>
-	<div class="space200"></div>
+<div class="space100"></div>
 </div>
