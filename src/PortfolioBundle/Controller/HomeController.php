@@ -101,4 +101,20 @@ class HomeController extends Controller
 		return array();
     }
 
+    /**
+    * @Template("PortfolioBundle::projects.html.twig")
+    */
+    static public function getProjectsAction()
+    {
+		return array();
+    }
+
+    /**
+    * @Template("PortfolioBundle::about.html.twig")
+    */
+    static public function getAboutsAction()
+    {
+		return array();
+    }
+
 }
