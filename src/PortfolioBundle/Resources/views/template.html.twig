@@ -26,20 +26,17 @@
 		<![endif]-->
 	</head>
 	<body>
-		<div class="container-fluid no-space">
+		<div class="container-fluid no-space"> <span id="wid-helper">dsfsdf</span>
 			{{ render(controller('PortfolioBundle:Home:getTop')) }}
 			{{ render(controller('PortfolioBundle:Home:getMenu')) }}
 			{{ render(controller('PortfolioBundle:Home:getOffer')) }}
 			{{ render(controller('PortfolioBundle:Home:getCv')) }}
 			{{ render(controller('PortfolioBundle:Home:getProjects')) }}
 			{{ render(controller('PortfolioBundle:Home:getAbouts')) }}
+			{{ render(controller('PortfolioBundle:Home:contact')) }}
+			{{ render(controller('PortfolioBundle:Home:getFooter')) }}
 			{% block Container %}{% endblock %}
 			{% include ('PortfolioBundle::modals.html.twig') %}
-			<div class="space200"></div>
-			<div class="space200"></div>
-			<div class="space200"></div>
-			<div class="space200"></div>
-			<div class="space200"></div>
 		</div>
 			{% block javascripts %}	
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

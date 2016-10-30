@@ -5,7 +5,10 @@ namespace PortfolioBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\Request;
+use PortfolioBundle\Form\Type\ContactType;
+//use PortfolioBundle\Entity\Contact;
 
 class HomeController extends Controller
 {
@@ -47,7 +50,7 @@ class HomeController extends Controller
 	    			'name' => '#O mnie'
 	    		),
 	    		array(
-	    			'path' => '#contact',
+	    			'path' => '#contact-form',
 	    			'name' => '#Kontakt'
 	    		),
 	    	)	
@@ -78,7 +81,7 @@ class HomeController extends Controller
 	    			'name' => '#O mnie'
 	    		),
 	    		array(
-	    			'path' => '#contact',
+	    			'path' => '#contact-form',
 	    			'name' => '#Kontakt'
 	    		),
 	    	)	
@@ -113,6 +116,35 @@ class HomeController extends Controller
     * @Template("PortfolioBundle::about.html.twig")
     */
     static public function getAboutsAction()
+    {
+		return array();
+    }
+
+    /**
+    * @Template("PortfolioBundle::contact.html.twig")
+    */
+    public function contactAction(Request $Request)
+    {
+        //$contact = new Contact();
+        $contactForm = $this->createForm(ContactType::class);
+
+        $contactForm->handleRequest($Request);
+
+        if($contactForm->isValid())
+        {
+            $formData = $contactForm->getData();
+        }
+
+        return array(
+            'form' => $contactForm->createView(),
+            'formData' => isset($formData) ? $formData : NULL
+        );
+    }
+
+    /**
+    * @Template("PortfolioBundle::footer.html.twig")
+    */
+    public function getFooterAction()
     {
 		return array();
     }
