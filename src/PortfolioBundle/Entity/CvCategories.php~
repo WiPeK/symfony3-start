@@ -1,0 +1,53 @@
+<?php
+
+namespace PortfolioBundle\Entity;
+
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="cv_categories")
+ */
+class CvCategories
+{
+	/**
+	 * @ORM\Column(type="integer")
+	 * @ORM\Id
+	 * @ORM\GeneratedValue(strategy="AUTO")
+	 * @ORM\OneToMany(targetEntity="cv_properties", mappedBy="cv_categories")
+	 */
+	private $idCvCategory;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\NotBlank
+	 *
+     * @Assert\Length(
+     * 	max=255,
+     *	min = 2
+     * )
+     */
+	private $cvCategoryName;
+
+	/**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     * 	max=255,
+     *	min = 2
+     * )
+     */
+	private $iconClass;
+
+	/**
+	 * @ORM\OneToMany(targetEntity="CvProperties", mappedBy="cv_categories")
+	 */
+	private $properties;
+
+	public function __construct()
+	{
+		$this->properties = new ArrayCollection();
+	}
+}

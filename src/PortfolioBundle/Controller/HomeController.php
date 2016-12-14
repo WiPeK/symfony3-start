@@ -5,10 +5,9 @@ namespace PortfolioBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\Request;
 use PortfolioBundle\Form\Type\ContactType;
-//use PortfolioBundle\Entity\Contact;
+use PortfolioBundle\Entity\Contact;
 
 class HomeController extends Controller
 {
@@ -84,7 +83,7 @@ class HomeController extends Controller
 	    			'path' => '#contact-form',
 	    			'name' => '#Kontakt'
 	    		),
-	    	)	
+	    	)
     	);
     }
 
@@ -99,9 +98,19 @@ class HomeController extends Controller
     /**
     * @Template("PortfolioBundle::cv.html.twig")
     */
-    static public function getCvAction()
+    public function getCvAction()
     {
-		return array();
+		$em = $this->getDoctrine()->getManager();
+        $qb = $em->createQueryBuilder();
+
+        $qb->select(array('c', 'p'))
+            ->from('PortfolioBundle:CvCategories', 'c')
+            ->join('c.properties', 'p');
+        $query = $qb->getQuery();
+
+        return array(
+            'cvData' => $query->getResult()
+        );
     }
 
     /**
@@ -125,19 +134,35 @@ class HomeController extends Controller
     */
     public function contactAction(Request $Request)
     {
-        //$contact = new Contact();
-        $contactForm = $this->createForm(ContactType::class);
+        $Request = $this->get('request_stack')->getMasterRequest();
+        $Contact = new Contact();
+        $contactForm = $this->createForm(ContactType::class, $Contact);
 
         $contactForm->handleRequest($Request);
 
         if($contactForm->isValid())
         {
-            $formData = $contactForm->getData();
+
+            $Contact->setSendDate(new \DateTime());
+
+            $saveToDB = $this->getDoctrine()->getManager();
+            $saveToDB->persist($Contact);
+            $saveToDB->flush();
+
+            $message = \Swift_Message::newInstance()
+                        ->setSubject($Contact->getSubject())
+                        ->setFrom($Contact->getEmail())
+                        ->setTo('wipekxxx@gmail.com')
+                        ->setBody($Contact->getMessage());
+
+            $this->get('mailer')->send($message);
+
+            $msg = 'Wiadomość została wysłana.';
         }
 
         return array(
             'form' => $contactForm->createView(),
-            'formData' => isset($formData) ? $formData : NULL
+            'msg' => isset($msg) ? $msg : NULL
         );
     }
 
@@ -146,7 +171,7 @@ class HomeController extends Controller
     */
     public function getFooterAction()
     {
-		return array();
+        return array();
     }
 
 }

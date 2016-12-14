@@ -33,7 +33,7 @@
 			{{ render(controller('PortfolioBundle:Home:getCv')) }}
 			{{ render(controller('PortfolioBundle:Home:getProjects')) }}
 			{{ render(controller('PortfolioBundle:Home:getAbouts')) }}
-			{{ render(controller('PortfolioBundle:Home:contact')) }}
+			{{ render(controller('PortfolioBundle:Home:contact', {'request':app.request})) }}
 			{{ render(controller('PortfolioBundle:Home:getFooter')) }}
 			{% block Container %}{% endblock %}
 			{% include ('PortfolioBundle::modals.html.twig') %}

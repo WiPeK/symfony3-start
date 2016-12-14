@@ -3,5 +3,5 @@ portfolio:
     prefix:   /
 
 app:
-    resource: "@AppBundle/Controller/"
+    resource: "@PortfolioBundle/Controller/"
     type:     annotation

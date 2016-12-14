@@ -26,47 +26,20 @@ class ContactType extends AbstractType{
     			'label' => 'Email',
     			'attr' => array(
     				'class' => 'form-control'
-    			),
-                'constraints' => array(
-                    new Assert\NotBlank(
-                        array(
-                            'message' => 'Email value should not be blank.'
-                        )
-                    ),
-                    new Assert\Email(
-                        array(
-                            'strict' => true,
-                            'message' => 'The email "{{ value }}" is not a valid email.'
-                        )
-                    )
-                )
+    			)
     		))
     		->add('subject', TextType::class, array(
     			'label' => 'Temat',
     			'attr' => array(
     				'class' => 'form-control'
-    			),
-                'constraints' => array(
-                    new Assert\NotBlank(
-                        array(
-                            'message' => 'Subject value should not be blank.'
-                        )
-                    )
-                )
+    			)
     		))
     		->add('message', TextareaType::class, array(
     			'label' => 'Treść wiadomości',
     			'attr' => array(
     				'class' => 'form-control',
     				'rows' => 10
-    			),
-                'constraints' => array(
-                    new Assert\NotBlank(
-                        array(
-                            'message' => 'Message value should not be blank.'
-                        )
-                    )
-                )
+    			)
     		))
     		->add('send_message', SubmitType::class, array(
     			'attr' => array(
@@ -82,5 +55,11 @@ class ContactType extends AbstractType{
         //    'id' => array('id' => 'contact-form')
         //));
 	}
+
+    public function setDefaultOptions(\Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver) {
+        $resolver->setDefaults(array(
+            'data_class' => 'PortfolioBundle\Entity\Contact'
+        ));
+    }
 
 }

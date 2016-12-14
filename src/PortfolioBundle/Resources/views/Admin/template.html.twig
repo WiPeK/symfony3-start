@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+    <head>
+        {% include ('PortfolioBundle:Admin:metas.html.twig') %}
+        {% include ('PortfolioBundle:Admin:stylesheets.html.twig') %}
+    </head>
+        <body class="">
+            <div class="bg-dark dk" id="wrap">
+                {% include ('PortfolioBundle:Admin:top.html.twig') %}
+                {% include ('PortfolioBundle:Admin:left.html.twig') %}
+                <div id="content">
+                    {% block pageContainer %}{% endblock %}
+                </div>
+                {% include ('PortfolioBundle:Admin:right.html.twig') %}
+            </div>
+            {% include ('PortfolioBundle:Admin:footer.html.twig') %}
+            {% include ('PortfolioBundle:Admin:modals.html.twig') %}
+            {% include ('PortfolioBundle:Admin:scripts.html.twig') %}
+        </body>
+</html>

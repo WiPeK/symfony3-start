@@ -19,32 +19,52 @@
 			</ul>
 		</div>
 		<div class="col-xl-7 col-lg-8 col-md-8 no-space">
-			<ul class="nav nav-tabs" id="myTab" role="tablist">
-			  <li class="nav-item">
-			    <a class="nav-link active" data-toggle="tab" href="#study-tab" role="tab">Wykształcenie</a>
-			  </li>
-			  <li class="nav-item">
-			    <a class="nav-link" data-toggle="tab" href="#exp-tab" role="tab">Doświadczenie</a>
-			  </li>
-			  <li class="nav-item">
-			    <a class="nav-link" data-toggle="tab" href="#achiev-tab" role="tab">Osiągnięcia</a>
-			  </li>
-			  <li class="nav-item">
-			    <a class="nav-link" data-toggle="tab" href="#quali-tab" role="tab">Dodatkowe kwalifikacje</a>
-			  </li>
-			  <li class="nav-item">
-			    <a class="nav-link" data-toggle="tab" href="#skills-tab" role="tab">Umiejętności</a>
-			  </li>
-			  <li class="nav-item">
-			    <a class="nav-link" data-toggle="tab" href="#langs-tab" role="tab">Języki obce</a>
-			  </li>
-			  <li class="nav-item">
-			    <a class="nav-link" data-toggle="tab" href="#interest-tab" role="tab">Zainteresowania</a>
-			  </li>
-			</ul>
+			{% if cvData is not empty %}
+				<ul class="nav nav-tabs" id="myTab" role="tablist">
+					{% set i = 0 %}
+					{% for category in cvData %}
+						<li class="nav-item">
+							<a class="nav-link {{(i==0)? 'active' : ''}}" data-toggle="tab" href="#{{category.idCvCategory}}__{{category.idCvCategory}}-tab" role="tab">{{category.cvCategoryName}}</a>
+							{% set i = 1 %}
+						</li>
+					{% endfor %}
+				</ul>
+			{% else %}
+				Niestety CV jest puste
+			{% endif %}
 
 			<div class="tab-content tabs-custom">
-			  <div class="tab-pane fade in active" id="study-tab" role="tabpanel">
+				{% if cvData is not empty %}
+				{% set j = 0 %}
+					{% for category in cvData %}
+						<div class="tab-pane fade in {{(i==0)? 'active' : ''}}" id="{{category.idCvCategory}}__{{category.idCvCategory}}-tab" role="tabpanel">
+							<ul class="cv-tabs">
+								{% for property in category.properties %}
+								<span class="cirli"></span>
+								<li>
+									{% if property.id is not empty %}
+										<div class="title-tabs">{{ property.cvPropertyTitle }}</div>
+									{% endif %}
+									<div class="cont-tabs">{{ property.cvPropertyName }}</div>
+									{% if property.cvDateFrom is not empty %}
+										<div class="date-tabs">
+											{{ property.cvDateFrom|date("m/d/Y") }}
+											{% if property.cvDateFrom is not empty %}
+											 - {{ property.cvDateTo|date("m/d/Y") }}
+											{% endif %}
+										</div>
+									{% endif %}
+								</li>
+								{% set j = 1 %}
+								{% endfor %}
+							</ul>
+					  		<h4 class="bot-title-cv"><i class="{{category.iconClass}}"></i> {{category.cvCategoryName}}</h4>
+					  	</div>
+				  	{% endfor %}
+				{% endif %}
+			</div>
+
+			<!--   <div class="tab-pane fade in active" id="study-tab" role="tabpanel">
 			  	<ul class="cv-tabs">
 			  		<span class="cirli"></span>
 			  		<li>
@@ -184,7 +204,7 @@
 			  	</ul>
 			  	<h4 class="bot-title-cv"><i class="mdi mdi-puzzle"></i> Zainteresowania</h4>
 			  </div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 <div class="space100"></div>
