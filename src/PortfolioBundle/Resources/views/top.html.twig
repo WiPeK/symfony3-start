@@ -1,23 +1,36 @@
-<div class="top-custom no-space homepage-hero-module" id="top-custom">
-    <div class="video-container">
-		<div class="text-on-video">
-			<h3>Witaj na stronie mojego portfolio...</h3>
-			<h4>Ja... Krzysztof Adamczyk | WiPeK <br> chciałbym zaprosić Cię do zapoznania się z tą stroną</h4>
-			<h4>Będzie mi bardzo miło jeżeli poświęcisz swój bardzo cenny czas<br>i spędzisz tu chwilę aby poznać moją osobę<br>...i ewentualnie podjąć ze mną współpracę</h4>
-			<h2>Zapraszam</h2>
-			<div class="clearfix"></div>
-			<ul class="buttons-top-custom">
-				{% for item in menu %}
-			        <li>
-			          <a class="btn btn-raised btn-primary" href="{{item['path']}}">{{ item['name'] }}</a>
-			        </li>
-	      		{% endfor %}
-			</ul>
-		</div>
-		<div class="filter"></div>
-        <video autoplay loop poster="{{ asset('bundles/portfolio/video/Aloha-Mundo.jpg') }}" class="fillWidth">
-            <source src="{{ asset('bundles/portfolio/video/Aloha-Mundo.mp4') }}" type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
-            <source src="{{ asset('bundles/portfolio/video/Aloha-Mundo.webm') }}" type="video/webm" />Your browser does not support the video tag. I suggest you upgrade your browser.
-        </video>
-    </div>
-</div>
+{% if topData is not empty %}
+	<div class="top-custom no-space homepage-hero-module" id="top-custom">
+	    <div class="video-container">
+			<div class="text-on-video">
+				{% if topData.isTopAsHtml == 0 %}
+					{% if topData.topHeader is not empty %}
+						<h3>{{ topData.topHeader }}</h3>
+					{% endif %}
+					{% if topData.topText is not empty %}
+						<h4>{{ topData.topText }}</h4>
+					{% endif %}
+					{% if topData.topFooter is not empty %}
+						<h2>{{ topData.topFooter }}</h2>
+					{% endif %}
+					<div class="clearfix"></div>
+				{% else %}
+					{% if topData.topAsHtml is not empty %}
+						{{ topData.topAsHtml|raw }}
+					{% endif %}
+				{% endif %}
+				<ul class="buttons-top-custom">
+					{% for item in menuData %}
+				        <li>
+				          <a class="btn btn-raised btn-primary" href="{{ item.menuPath }}">{{ item.menuName }}</a>
+				        </li>
+		      		{% endfor %}
+				</ul>
+			</div>
+			<div class="filter"></div>
+	        <video autoplay loop poster="{{ asset(topData.topPosterUrl) }}" class="fillWidth">
+	            <source src="{{ asset(topData.topVideoUrl) }}" type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
+	            <source src="{{ asset(topData.topVideoUrl2) }}" type="video/webm" />Your browser does not support the video tag. I suggest you upgrade your browser.
+	        </video>
+	    </div>
+	</div>
+{% endif %}

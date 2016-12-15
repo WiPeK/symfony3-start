@@ -1,116 +1,75 @@
-<div id="projects">
-	<h5 class="display-1 text-xs-center h-title-custom">Projekty</h5>
-	<div class="space50"></div>
-	<div class="row no-space">
-		<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 no-space">
-			<div class="project-bar">
-				<img class="img-fluid img-proj" src="{{ asset('bundles/portfolio/img/projects/kamienie.jpg') }}" alt="my photo">
-				<div class="slid-desc w-100 text-xs-center">
-					<h4 class="project-title">Kamienny Ogród</h4>
-					<p class="short-describe">Lorem ipsum dolor sit amet.</p>
-					<button type="button" class="btn btn-raised btn-info no-border-radius" data-toggle="modal" data-target="#modal-pr0">Zobacz</button>
-				</div>
-			</div>
-		</div>
+{% if projectsData is not empty %}
+	<div id="projects">
+		<h5 class="display-1 text-xs-center h-title-custom">Projekty</h5>
+		<div class="space50"></div>
+		<div class="row no-space">
+			{% for project in projectsData %}
+				<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 no-space">
+					<div class="project-bar">
+						{% if project.projectPhoto is not empty %}
+							<img class="img-fluid img-proj" src="{{ asset(project.projectPhoto) }}" alt="my photo">
+						{% else %}
+							<h4 class="project-title">{{project.projectName}}</h4>
+						{% endif %}
+						<div class="slid-desc w-100 text-xs-center">
+							<h4 class="project-title">{{project.projectName}}</h4>
+							<p class="short-describe">Lorem ipsum dolor sit amet.</p>
+							<button type="button" class="btn btn-raised btn-info no-border-radius" data-toggle="modal" data-target="#modal{{project.idProjects}}-{{project.idProjects}}">Zobacz</button>
+						</div>
+					</div>
 
-		<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 no-space">
-			<div class="project-bar">
-				<img class="img-fluid img-proj" src="{{ asset('bundles/portfolio/img/projects/druk.jpg') }}" alt="my photo">
-				<div class="slid-desc w-100 text-xs-center">
-					<h4 class="project-title">Drukarki 3D</h4>
-					<p class="short-describe">Lorem ipsum dolor sit amet.</p>
-					<button type="button" class="btn btn-raised btn-info no-border-radius" data-toggle="modal" data-target="#modal-service">Zobacz</button>
-				</div>
-			</div>
-		</div>
+					<div id="modal{{project.idProjects}}-{{project.idProjects}}" class="modal fade in modal-lg modal-pr0" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+								</div>
+								<div class="modal-body project-modal">
+									<div class="row">
+										<div class="col-lg-7 col-sm-12">
+											<h3>{{project.projectName}}</h3>
+											{% if project.projectTechnologies is not empty %}
+											<p class="technology">{{project.projectTechnologies}}</p>
+											{% endif %}
 
-		<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 no-space">
-			<div class="project-bar">
-				<img class="img-fluid img-proj" src="{{ asset('bundles/portfolio/img/projects/mapy.jpg') }}" alt="my photo">
-				<div class="slid-desc w-100 text-xs-center">
-					<h4 class="project-title">Mapy</h4>
-					<p class="short-describe">Lorem ipsum dolor sit amet.</p>
-					<button type="button" class="btn btn-raised btn-info no-border-radius" data-toggle="modal" data-target="#modal-service">Zobacz</button>
-				</div>
-			</div>
-		</div>
+											{% if project.projectDescribe is not empty %}
+											<p class="describe">{{project.projectDescribe}}</p>
+											{% endif %}
 
-		<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 no-space">
-			<div class="project-bar">
-				<img class="img-fluid img-proj" src="{{ asset('bundles/portfolio/img/projects/mpc.png') }}" alt="my photo">
-				<div class="slid-desc w-100 text-xs-center">
-					<h4 class="project-title">MPC</h4>
-					<p class="short-describe">Lorem ipsum dolor sit amet.</p>
-					<button type="button" class="btn btn-raised btn-info no-border-radius" data-toggle="modal" data-target="#modal-service">Zobacz</button>
-				</div>
-			</div>
-		</div>
+											{% if project.projectUrl is not empty %}
+												<a target="_blank" href="{{project.projectUrl}}" type="button" class="btn btn-raised btn-info no-border-radius">Przejdź do strony</a>
+												<br>
+											{% endif %}
 
-		<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 no-space">
-			<div class="project-bar">
-				<img class="img-fluid img-proj" src="{{ asset('bundles/portfolio/img/projects/tesla.jpg') }}" alt="my photo">
-				<div class="slid-desc w-100 text-xs-center">
-					<h4 class="project-title">Tesla</h4>
-					<p class="short-describe">Lorem ipsum dolor sit amet.</p>
-					<button type="button" class="btn btn-raised btn-info no-border-radius" data-toggle="modal" data-target="#modal-service">Zobacz</button>
-				</div>
-			</div>
-		</div>
+											{% if project.projectAdminPanelUrl is not empty %}
+												{% if (project.projectAdminPanelLogin is not empty) and (project.projectAdminPanelPassword is not empty) %}
+												<p class="admin-data">Dane logowania do panelu administracyjnego:</p>
+												<samp>Login: {{project.projectAdminPanelLogin}} Hasło: {{project.projectAdminPanelPassword}}</samp>
+												<div class="clearfix"></div>
+												{% endif %}
+												<a target="_blank" href="{{project.projectAdminPanelUrl}}" type="button" class="btn btn-raised btn-info no-border-radius">Przejdź do panelu</a>
+											{% endif %}
+										</div>
+										<div class="col-lg-5 col-sm-8">
+											{% if project.projectPhoto is not empty %}
+											<img class="img-fluid img-modal" src="{{ asset(project.projectPhoto) }}" alt="{{project.projectName}}">
+											{% endif %}
+											{% if project.projectPhoto2 is not empty %}
+											<img class="img-fluid img-modal" src="{{ asset(project.projectPhoto2) }}" alt="{{project.projectName}}2">
+											{% endif %}
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default btn-close" data-dismiss="modal">Zamknij</button>
+								</div>
+							</div>
+						</div>
+					</div>
 
-		<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 no-space">
-			<div class="project-bar">
-				<img class="img-fluid img-proj" src="{{ asset('bundles/portfolio/img/projects/cms.jpg') }}" alt="my photo">
-				<div class="slid-desc w-100 text-xs-center">
-					<h4 class="project-title">CMS</h4>
-					<p class="short-describe">Lorem ipsum dolor sit amet.</p>
-					<button type="button" class="btn btn-raised btn-info no-border-radius" data-toggle="modal" data-target="#modal-service">Zobacz</button>
 				</div>
-			</div>
+			{% endfor %}
 		</div>
-
-		<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 no-space">
-			<div class="project-bar">
-				<img class="img-fluid img-proj" src="{{ asset('bundles/portfolio/img/projects/metin.jpg') }}" alt="my photo">
-				<div class="slid-desc w-100 text-xs-center">
-					<h4 class="project-title">Metin2 CMS</h4>
-					<p class="short-describe">Lorem ipsum dolor sit amet.</p>
-					<button type="button" class="btn btn-raised btn-info no-border-radius" data-toggle="modal" data-target="#modal-service">Zobacz</button>
-				</div>
-			</div>
-		</div>
-
-		<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 no-space">
-			<div class="project-bar">
-				<img class="img-fluid img-proj" src="{{ asset('bundles/portfolio/img/projects/projekt.png') }}" alt="my photo">
-				<div class="slid-desc w-100 text-xs-center">
-					<h4 class="project-title">Projekt PP1</h4>
-					<p class="short-describe">Lorem ipsum dolor sit amet.</p>
-					<button type="button" class="btn btn-raised btn-info no-border-radius" data-toggle="modal" data-target="#modal-service">Zobacz</button>
-				</div>
-			</div>
-		</div>
-
-		<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 no-space">
-			<div class="project-bar">
-				<img class="img-fluid img-proj" src="{{ asset('bundles/portfolio/img/projects/pnew.png') }}" alt="my photo">
-				<div class="slid-desc w-100 text-xs-center">
-					<h4 class="project-title">Portfolio V2</h4>
-					<p class="short-describe">Lorem ipsum dolor sit amet.</p>
-					<button type="button" class="btn btn-raised btn-info no-border-radius" data-toggle="modal" data-target="#modal-service">Zobacz</button>
-				</div>
-			</div>
-		</div>
-
-		<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 no-space">
-			<div class="project-bar">
-				<img class="img-fluid img-proj" src="{{ asset('bundles/portfolio/img/projects/portfolio.jpg') }}" alt="my photo">
-				<div class="slid-desc w-100 text-xs-center">
-					<h4 class="project-title">Portfolio V1</h4>
-					<p class="short-describe">Lorem ipsum dolor sit amet.</p>
-					<button type="button" class="btn btn-raised btn-info no-border-radius" data-toggle="modal" data-target="#modal-service">Zobacz</button>
-				</div>
-			</div>
-		</div>		
+		<div class="space100"></div>
 	</div>
-	<div class="space100"></div>
-</div>
+{% endif %}

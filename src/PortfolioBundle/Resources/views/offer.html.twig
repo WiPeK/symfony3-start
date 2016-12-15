@@ -1,28 +1,22 @@
-<div id="oferta">	
-	<div class="container oferta-custom no-space">
-		<div class="row top">
-			<h1 class="display-2">Oferta</h1>
-			  <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+{% if offerData is not empty %}
+	<div id="oferta">
+		<div class="container oferta-custom no-space">
+			<div class="row top">
+				<h1 class="display-2">Oferta</h1>
+				  <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+			</div>
 		</div>
-	</div>
-		<div class="row no-space panels-custom">
-			<div class="col-lg-4 col-md-4 col-sm-6 no-space offer-bar">
-				<img class="img-off w-100" src="{{ asset('bundles/portfolio/img/code.jpeg') }}" alt="RWD">
-				<h3 class="obh text-xs-center">Serwis komputerowy</h3>
-				<div class="offer-desc text-xs-center">
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione quae vel in iste repudiandae quaerat asperiores doloribus, odio aspernatur magnam itaque suscipit accusamus dolore a quisquam praesentium nulla quo veniam.</p>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-4 col-sm-6 no-space offer-bar">
-				<img class="img-off w-100" src="{{ asset('bundles/portfolio/img/cms.jpg') }}" alt="RWD">
-				<h3 class="obh text-xs-center">Serwis komputerowy</h3>
-				<div class="offer-desc text-xs-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione quae vel in iste repudiandae quaerat asperiores doloribus, odio aspernatur magnam itaque suscipit accusamus dolore a quisquam praesentium nulla quo veniam.</div>
-			</div>
-			<div class="col-lg-4 col-md-4 col-sm-6 no-space offer-bar">
-				<img class="img-off w-100" src="{{ asset('bundles/portfolio/img/rwd.jpg') }}" alt="RWD">
-				<h3 class="obh text-xs-center">Serwis komputerowy</h3>
-				<div class="offer-desc text-xs-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione quae vel in iste repudiandae quaerat asperiores doloribus, odio aspernatur magnam itaque suscipit accusamus dolore a quisquam praesentium nulla quo veniam.</div>
+			<div class="row no-space panels-custom">
+				{% for offer in offerData %}
+					<div class="col-lg-4 col-md-4 col-sm-6 no-space offer-bar">
+						<img class="img-off w-100" src="{{ asset(offer.offerPhotoUrl) }}" alt="RWD">
+						<h3 class="obh text-xs-center">{{ offer.offerName }}</h3>
+						<div class="offer-desc text-xs-center">
+							<p>{{ offer.offerDescribe }}</p>
+						</div>
+					</div>
+				{% endfor %}
 			</div>
 		</div>
 	</div>
-</div>
+{% endif %}

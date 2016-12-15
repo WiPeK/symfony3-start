@@ -1,0 +1,100 @@
+<?php
+
+namespace PortfolioBundle\Entity;
+
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="projects")
+ */
+class Projects
+{
+	/**
+	 * @ORM\Column(type="integer")
+	 * @ORM\Id
+	 * @ORM\GeneratedValue(strategy="AUTO")
+	 */
+	private $id_projects;
+
+	/**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\NotBlank
+	 *
+     * @Assert\Length(
+     * 	max=255,
+     *	min = 2
+     * )
+     */
+	private $projectName;
+
+	/**
+     * @ORM\Column(type="string", length=255, nullable=true)
+	 *
+     * @Assert\Length(
+     * 	max=255,
+     * )
+     */
+	private $projectTechnologies;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+	private $projectDescribe;
+
+	/**
+     * @ORM\Column(type="string", length=255, nullable=true)
+	 *
+     * @Assert\Length(
+     * 	max=255,
+     * )
+     */
+	private $projectUrl;
+
+	/**
+     * @ORM\Column(type="string", length=255, nullable=true)
+	 *
+     * @Assert\Length(
+     * 	max=255,
+     * )
+     */
+	private $projectAdminPanelUrl;
+
+	/**
+     * @ORM\Column(type="string", length=255, nullable=true)
+	 *
+     * @Assert\Length(
+     * 	max=255,
+     * )
+     */
+	private $projectAdminPanelLogin;
+
+	/**
+     * @ORM\Column(type="string", length=255, nullable=true)
+	 *
+     * @Assert\Length(
+     * 	max=255,
+     * )
+     */
+	private $projectAdminPanelPassword;
+
+	/**
+     * @ORM\Column(type="string", length=255, nullable=true)
+	 *
+     * @Assert\Length(
+     * 	max=255,
+     * )
+     */
+	private $projectPhoto;
+
+	/**
+     * @ORM\Column(type="string", length=255, nullable=true)
+	 *
+     * @Assert\Length(
+     * 	max=255,
+     * )
+     */
+	private $projectPhoto2;
+}

@@ -24,7 +24,7 @@
 					{% set i = 0 %}
 					{% for category in cvData %}
 						<li class="nav-item">
-							<a class="nav-link {{(i==0)? 'active' : ''}}" data-toggle="tab" href="#{{category.idCvCategory}}__{{category.idCvCategory}}-tab" role="tab">{{category.cvCategoryName}}</a>
+							<a class="nav-link {{(i==0)? 'active' : ''}}" data-toggle="tab" href="#aaa{{category.idCvCategory}}-tab{{category.idCvCategory}}" role="tab">{{category.cvCategoryName}}</a>
 							{% set i = 1 %}
 						</li>
 					{% endfor %}
@@ -37,10 +37,16 @@
 				{% if cvData is not empty %}
 				{% set j = 0 %}
 					{% for category in cvData %}
-						<div class="tab-pane fade in {{(i==0)? 'active' : ''}}" id="{{category.idCvCategory}}__{{category.idCvCategory}}-tab" role="tabpanel">
+						<div class="tab-pane fade in {{(j==0)? 'active' : ''}}" id="aaa{{category.idCvCategory}}-tab{{category.idCvCategory}}" role="tabpanel">
 							<ul class="cv-tabs">
 								{% for property in category.properties %}
-								<span class="cirli"></span>
+								{% if (property.cvPropertyTitle is not empty) and (property.cvPropertyName is not empty) and (property.cvDateFrom is not empty) %}
+									<span class="cirli"></span>
+								{% elseif ((property.cvPropertyTitle is not empty) and (property.cvDateFrom is empty)) or ((property.cvPropertyTitle is empty) and (property.cvDateFrom is not empty)) %}
+									<span class="cirli-double"></span>
+								{% else %}
+									<span class="cirli-single"></span>
+								{% endif %}
 								<li>
 									{% if property.id is not empty %}
 										<div class="title-tabs">{{ property.cvPropertyTitle }}</div>
@@ -48,9 +54,9 @@
 									<div class="cont-tabs">{{ property.cvPropertyName }}</div>
 									{% if property.cvDateFrom is not empty %}
 										<div class="date-tabs">
-											{{ property.cvDateFrom|date("m/d/Y") }}
+											{{ property.cvDateFrom|date("Y") }}
 											{% if property.cvDateFrom is not empty %}
-											 - {{ property.cvDateTo|date("m/d/Y") }}
+											 - {{ property.cvDateTo|date("Y") }}
 											{% endif %}
 										</div>
 									{% endif %}
@@ -63,148 +69,6 @@
 				  	{% endfor %}
 				{% endif %}
 			</div>
-
-			<!--   <div class="tab-pane fade in active" id="study-tab" role="tabpanel">
-			  	<ul class="cv-tabs">
-			  		<span class="cirli"></span>
-			  		<li>
-			  			<div class="title-tabs">Informatyka</div>
-			  			<div class="cont-tabs">Politechnika Świętokrzyska</div>
-			  			<div class="date-tabs">2015 - 2020</div>
-			  		</li>
-			  		<span class="cirli"></span>
-			  		<li>
-			  			<div class="title-tabs">Technik Informatyk</div>
-			  			<div class="cont-tabs">Technikum nr.2, Skarżysko Kamienna</div>
-			  			<div class="date-tabs">09.2011 - 04.2015</div>
-			  		</li>
-			  	</ul>
-			  	<h4 class="bot-title-cv"><i class="mdi mdi-certificate"></i> Wykształcenie</h4>
-			  </div>
-			  <div class="tab-pane fade" id="exp-tab" role="tabpanel">
-			  	<ul class="cv-tabs">
-			  		<span class="cirli"></span>
-			  		<li>
-			  			<div class="title-tabs">Magazynier</div>
-			  			<div class="cont-tabs">Brezan Automaterialen, Holandia</div>
-			  			<div class="date-tabs">05.2014 - 08.2014</div>
-			  		</li>
-			  		<span class="cirli"></span>
-			  		<li>
-			  			<div class="title-tabs">Praktykant</div>
-			  			<div class="cont-tabs">INTB Sebastian Pierzchała</div>
-			  			<div class="date-tabs">11.2013</div>
-			  		</li>
-			  		<span class="cirli"></span>
-			  		<li>
-			  			<div class="title-tabs">Praktykant</div>
-			  			<div class="cont-tabs">WBS TRAINING AG, Niemcy</div>
-			  			<div class="date-tabs">03.2013</div>
-			  		</li>
-			  	</ul>
-			  	<h4 class="bot-title-cv"><i class="mdi mdi-briefcase"></i> Doświadczenie</h4>
-			  </div>
-			  <div class="tab-pane fade" id="achiev-tab" role="tabpanel">
-			  	<ul class="cv-tabs">
-			  		<span class="cirli-double"></span>
-			  		<li>
-			  			<div class="cont-tabs">Tytuł najlepszego technika informatyka w zespole szkół ekonomicznych w Skarżysku-Kamiennej.</div>
-			  			<div class="date-tabs">04.2015</div>
-			  		</li>
-			  		<span class="cirli-double"></span>
-			  		<li>
-			  			<div class="cont-tabs">I miejsce w powiatowym konkursie na najlepszą stronę www dla szkół ponadgimnazjalnych, Skarżysko-Kamienna.</div>
-			  			<div class="date-tabs">05.2014</div>
-			  		</li>
-			  	</ul>
-			  	<h4 class="bot-title-cv"><i class="mdi mdi-trophy"></i> Osiągnięcia</h4>
-			  </div>
-			  <div class="tab-pane fade" id="quali-tab" role="tabpanel">
-			  	<ul class="cv-tabs">
-			  		<span class="cirli-double"></span>
-			  		<li>
-			  			<div class="cont-tabs">Certyfikat Masz zawód - masz pracę.</div>
-			  			<div class="date-tabs">2014</div>
-			  		</li>
-			  		<span class="cirli-double"></span>
-			  		<li>
-			  			<div class="cont-tabs">Certyfikat EUROPASS</div>
-			  			<div class="date-tabs">2013</div>
-			  		</li>
-			  		<span class="cirli-double"></span>
-			  		<li>
-			  			<div class="cont-tabs">Prawojazdy kategorii B</div>
-			  			<div class="date-tabs">2013</div>
-			  		</li>
-			  	</ul>
-			  	<h4 class="bot-title-cv"><i class="mdi mdi-account-star"></i> Dodatkowe kwalifikacje</h4>
-			  </div>
-			  <div class="tab-pane fade" id="skills-tab" role="tabpanel">
-			  	<ul class="cv-tabs">
-			  		<span class="cirli-single"></span>
-			  		<li>
-			  			<div class="cont-tabs">Organizacja pracy w grupie</div>
-			  		</li>
-			  		<span class="cirli-single"></span>
-			  		<li>
-			  			<div class="cont-tabs">Obsługa pakietu Microsoft Office</div>
-			  		</li>
-			  		<span class="cirli-single"></span>
-			  		<li>
-			  			<div class="cont-tabs">Kompleksowa obsługa komputera</div>
-			  		</li>
-			  		<span class="cirli-single"></span>
-			  		<li>
-			  			<div class="cont-tabs">Znajomość HTML5, CSS3, Twitter Bootstrap</div>
-			  		</li>
-			  		<span class="cirli-single"></span>
-			  		<li>
-			  			<div class="cont-tabs">Znajomość PHP oraz frameworka Codeigniter</div>
-			  		</li>
-			  		<span class="cirli-single"></span>
-			  		<li>
-			  			<div class="cont-tabs">Podstawowa znajomość jquery oraz javascript</div>
-			  		</li>
-			  	</ul>
-			  	<h4 class="bot-title-cv"><i class="mdi mdi-star"></i> Umiejętności</h4>
-			  </div>
-			  <div class="tab-pane fade" id="langs-tab" role="tabpanel">
-			  	<ul class="cv-tabs">
-			  		<span class="cirli-double"></span>
-			  		<li>
-			  			<div class="title-tabs">Język angielski</div>
-			  			<div class="cont-tabs">Poziom średniozaawansowany</div>
-			  		</li>
-			  		<span class="cirli-double"></span>
-			  		<li>
-			  			<div class="title-tabs">Język niemiecki</div>
-			  			<div class="cont-tabs">Poziom podstawowy</div>
-			  		</li>
-			  	</ul>
-			  	<h4 class="bot-title-cv"><i class="mdi mdi-google-translate"></i> Języki obce</h4>
-			  </div>
-			  <div class="tab-pane fade" id="interest-tab" role="tabpanel">
-			  	<ul class="cv-tabs">
-			  		<span class="cirli-single"></span>
-			  		<li>
-			  			<div class="cont-tabs">Muzyka</div>
-			  		</li>
-			  		<span class="cirli-single"></span>
-			  		<li>
-			  			<div class="cont-tabs">Polityka</div>
-			  		</li>
-			  		<span class="cirli-single"></span>
-			  		<li>
-			  			<div class="cont-tabs">Informatyka</div>
-			  		</li>
-			  		<span class="cirli-single"></span>
-			  		<li>
-			  			<div class="cont-tabs">Ciekawostki ze świata</div>
-			  		</li>
-			  	</ul>
-			  	<h4 class="bot-title-cv"><i class="mdi mdi-puzzle"></i> Zainteresowania</h4>
-			  </div>
-			</div> -->
 		</div>
 	</div>
 <div class="space100"></div>

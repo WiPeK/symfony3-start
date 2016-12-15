@@ -1,0 +1,47 @@
+<?php
+
+namespace PortfolioBundle\Entity;
+
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="offer")
+ */
+class Offer
+{
+	/**
+	 * @ORM\Column(type="integer")
+	 * @ORM\Id
+	 * @ORM\GeneratedValue(strategy="AUTO")
+	 */
+	private $idOffer;
+
+	/**
+     * @ORM\Column(type="string", length=40)
+     *
+     * @Assert\NotBlank
+     *
+     * @Assert\Length(
+     *  max=40,
+     * )
+     */
+	private $offerName;
+
+	/**
+     * @ORM\Column(type="text", nullable=true)
+     */
+	private $offerDescribe;
+
+	/**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\NotBlank
+     *
+     * @Assert\Length(
+     *  max=255,
+     * )
+     */
+	private $offerPhotoUrl;
+}

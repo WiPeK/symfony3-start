@@ -24,75 +24,48 @@ class HomeController extends Controller
 	/**
     * @Template("PortfolioBundle::menu.html.twig")
     */
-    static public function getMenuAction()
+    public function getMenuAction()
     {
+        $menu = $this->getDoctrine()
+            ->getRepository('PortfolioBundle:Menu')
+            ->findAll();
     	return array(
     		'logo' => array(
     			'url' => 'bundles/portfolio/img/logo.png',
     			'alt' => 'Logo portfolio'
     		),
-    		'menu' => array(
-    			array(
-	    			'path' => '#oferta',
-	    			'name' => '#Oferta'
-	    		),
-	    		array(
-	    			'path' => '#cv',
-	    			'name' => '#CV'
-	    		),
-	    		array(
-	    			'path' => '#projects',
-	    			'name' => '#Projekty'
-	    		),
-	    		array(
-	    			'path' => '#about',
-	    			'name' => '#O mnie'
-	    		),
-	    		array(
-	    			'path' => '#contact-form',
-	    			'name' => '#Kontakt'
-	    		),
-	    	)	
+    		'menuData' => $menu
     	);
     }
 
     /**
     * @Template("PortfolioBundle::top.html.twig")
     */
-    static public function getTopAction()
+    public function getTopAction()
     {
+        $top = $this->getDoctrine()
+            ->getRepository('PortfolioBundle:Top')
+            ->find(1);
+        $menu = $this->getDoctrine()
+            ->getRepository('PortfolioBundle:Menu')
+            ->findAll();
 		return array(
-    		'menu' => array(
-    			array(
-	    			'path' => '#oferta',
-	    			'name' => '#Oferta'
-	    		),
-	    		array(
-	    			'path' => '#cv',
-	    			'name' => '#CV'
-	    		),
-	    		array(
-	    			'path' => '#projects',
-	    			'name' => '#Projekty'
-	    		),
-	    		array(
-	    			'path' => '#about',
-	    			'name' => '#O mnie'
-	    		),
-	    		array(
-	    			'path' => '#contact-form',
-	    			'name' => '#Kontakt'
-	    		),
-	    	)
+            'topData' => $top,
+    		'menuData' => $menu
     	);
     }
 
     /**
     * @Template("PortfolioBundle::offer.html.twig")
     */
-    static public function getOfferAction()
+    public function getOfferAction()
     {
-		return array();
+        $offer = $this->getDoctrine()
+            ->getRepository('PortfolioBundle:Offer')
+            ->findAll();
+		return array(
+            'offerData' => $offer
+        );
     }
 
     /**
@@ -116,17 +89,27 @@ class HomeController extends Controller
     /**
     * @Template("PortfolioBundle::projects.html.twig")
     */
-    static public function getProjectsAction()
+    public function getProjectsAction()
     {
-		return array();
+		$projects = $this->getDoctrine()
+            ->getRepository('PortfolioBundle:Projects')
+            ->findAll();
+        return array(
+            'projectsData' => $projects
+        );
     }
 
     /**
     * @Template("PortfolioBundle::about.html.twig")
     */
-    static public function getAboutsAction()
+    public function getAboutsAction()
     {
-		return array();
+		$about = $this->getDoctrine()
+            ->getRepository('PortfolioBundle:About')
+            ->find(1);
+        return array(
+            'aboutData' => $about
+        );
     }
 
     /**
