@@ -11,6 +11,17 @@ use PortfolioBundle\Entity\Contact;
 
 class HomeController extends Controller
 {
+    private $settingsData;
+    private $em;
+
+    public function dispatchUrl()
+    {
+        $this->em = $this->getDoctrine()->getManager();
+        $settings = $this->em
+           ->getRepository('PortfolioBundle:Settings')
+           ->find(1);
+        $this->settingsData = $settings;
+    }
 
 	/**
     * @Route("/", name="homepage")
@@ -18,7 +29,10 @@ class HomeController extends Controller
     */
     public function indexAction()
     {
-        return array();
+        $this->dispatchUrl();
+        return array(
+            'settingsData' => $this->settingsData
+        );
     }
 
 	/**
@@ -26,7 +40,8 @@ class HomeController extends Controller
     */
     public function getMenuAction()
     {
-        $menu = $this->getDoctrine()
+        $this->dispatchUrl();
+        $menu = $this->em
             ->getRepository('PortfolioBundle:Menu')
             ->findAll();
     	return array(
@@ -34,7 +49,8 @@ class HomeController extends Controller
     			'url' => 'bundles/portfolio/img/logo.png',
     			'alt' => 'Logo portfolio'
     		),
-    		'menuData' => $menu
+    		'menuData' => $menu,
+            'settingsData' => $this->settingsData
     	);
     }
 
@@ -43,7 +59,8 @@ class HomeController extends Controller
     */
     public function getTopAction()
     {
-        $top = $this->getDoctrine()
+        $this->dispatchUrl();
+        $top = $this->em
             ->getRepository('PortfolioBundle:Top')
             ->find(1);
         $menu = $this->getDoctrine()
@@ -51,7 +68,8 @@ class HomeController extends Controller
             ->findAll();
 		return array(
             'topData' => $top,
-    		'menuData' => $menu
+    		'menuData' => $menu,
+            'settingsData' => $this->settingsData
     	);
     }
 
@@ -60,11 +78,13 @@ class HomeController extends Controller
     */
     public function getOfferAction()
     {
-        $offer = $this->getDoctrine()
+        $this->dispatchUrl();
+        $offer = $this->em
             ->getRepository('PortfolioBundle:Offer')
             ->findAll();
 		return array(
-            'offerData' => $offer
+            'offerData' => $offer,
+            'settingsData' => $this->settingsData
         );
     }
 
@@ -73,8 +93,8 @@ class HomeController extends Controller
     */
     public function getCvAction()
     {
-		$em = $this->getDoctrine()->getManager();
-        $qb = $em->createQueryBuilder();
+        $this->dispatchUrl();
+        $qb = $this->em->createQueryBuilder();
 
         $qb->select(array('c', 'p'))
             ->from('PortfolioBundle:CvCategories', 'c')
@@ -82,7 +102,8 @@ class HomeController extends Controller
         $query = $qb->getQuery();
 
         return array(
-            'cvData' => $query->getResult()
+            'cvData' => $query->getResult(),
+            'settingsData' => $this->settingsData
         );
     }
 
@@ -91,11 +112,13 @@ class HomeController extends Controller
     */
     public function getProjectsAction()
     {
-		$projects = $this->getDoctrine()
+        $this->dispatchUrl();
+		$projects = $this->em
             ->getRepository('PortfolioBundle:Projects')
             ->findAll();
         return array(
-            'projectsData' => $projects
+            'projectsData' => $projects,
+            'settingsData' => $this->settingsData
         );
     }
 
@@ -104,11 +127,13 @@ class HomeController extends Controller
     */
     public function getAboutsAction()
     {
-		$about = $this->getDoctrine()
+        $this->dispatchUrl();
+		$about = $this->em
             ->getRepository('PortfolioBundle:About')
             ->find(1);
         return array(
-            'aboutData' => $about
+            'aboutData' => $about,
+            'settingsData' => $this->settingsData
         );
     }
 
@@ -117,6 +142,7 @@ class HomeController extends Controller
     */
     public function contactAction(Request $Request)
     {
+        $this->dispatchUrl();
         $Request = $this->get('request_stack')->getMasterRequest();
         $Contact = new Contact();
         $contactForm = $this->createForm(ContactType::class, $Contact);
@@ -128,7 +154,7 @@ class HomeController extends Controller
 
             $Contact->setSendDate(new \DateTime());
 
-            $saveToDB = $this->getDoctrine()->getManager();
+            $saveToDB = $this->em;
             $saveToDB->persist($Contact);
             $saveToDB->flush();
 
@@ -145,7 +171,8 @@ class HomeController extends Controller
 
         return array(
             'form' => $contactForm->createView(),
-            'msg' => isset($msg) ? $msg : NULL
+            'msg' => isset($msg) ? $msg : NULL,
+            'settingsData' => $this->settingsData
         );
     }
 
@@ -154,7 +181,10 @@ class HomeController extends Controller
     */
     public function getFooterAction()
     {
-        return array();
+        $this->dispatchUrl();
+        return array(
+            'settingsData' => $this->settingsData
+        );
     }
 
 }

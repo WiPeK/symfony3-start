@@ -5,18 +5,21 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
-		<meta name="description" content="{{ meta_description }}">
-		<meta name="author" content="{{ meta_author }}">
+		<meta name="description" content="{{ settingsData.settingDescription }}">
+		<meta name="author" content="{{ settingsData.settingAuthor }}">
+		<meta name="keywords" content="{{ settingsData.settingKeywords }}">
+		<meta name="robots" content="index,follow">
+		<link rel="icon" href="{{ asset(settingsData.settingIconUrl) }}">
 		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-		<title>{% spaceless %}{% block pageTitle %}WiPeK{% endblock %}{% endspaceless %}</title>
+		<title>{% spaceless %}{{ settingsData.settingTitle }}{% endspaceless %}</title>
 
 		{% block stylesheets %}
-    <!-- Bootstrap core CSS -->
-    <link href="{{ asset('bundles/portfolio/css/bootstrap-material-design.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('bundles/portfolio/css/materialdesignicons.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('bundles/portfolio/css/ripples.css') }}" rel="stylesheet">
-    <link href="{{ asset('bundles/portfolio/css/style.css') }}" rel="stylesheet">
-    {% endblock %}
+		    <!-- Bootstrap core CSS -->
+		    <link href="{{ asset('bundles/portfolio/css/bootstrap-material-design.min.css') }}" rel="stylesheet">
+		    <link href="{{ asset('bundles/portfolio/css/materialdesignicons.min.css') }}" rel="stylesheet">
+		    <link href="{{ asset('bundles/portfolio/css/ripples.css') }}" rel="stylesheet">
+		    <link href="{{ asset('bundles/portfolio/css/style.css') }}" rel="stylesheet">
+    	{% endblock %}
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -35,7 +38,6 @@
 			{{ render(controller('PortfolioBundle:Home:getAbouts')) }}
 			{{ render(controller('PortfolioBundle:Home:contact', {'request':app.request})) }}
 			{{ render(controller('PortfolioBundle:Home:getFooter')) }}
-			{% block Container %}{% endblock %}
 		</div>
 			{% block javascripts %}	
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
